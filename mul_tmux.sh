@@ -15,10 +15,11 @@ done
 
 argAll=`echo $* | awk '{print $NF}'`
 
-if [[ ! "$identify"="" ]] ; then
+if [[ "$identify"="" ]] ; then
 	SSHCMD="ssh -o StrictHostKeyChecking=no -l $user -p $port "
 else
 	SSHCMD="ssh -o StrictHostKeyChecking=no  -i $identify -l $user -p $port "
+fi
 
 j=0
 for i in `cat $argAll`; do
