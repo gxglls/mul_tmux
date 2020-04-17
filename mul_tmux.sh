@@ -16,19 +16,19 @@ done
 argAll=`echo $* | awk '{print $NF}'`
 
 if [[ "$identify" == "" ]] ; then
-	SSHCMD="ssh -o StrictHostKeyChecking=no -l $user -p $port "
+        SSHCMD="ssh -o StrictHostKeyChecking=no -l $user -p $port "
 else
-	SSHCMD="ssh -o StrictHostKeyChecking=no  -i $identify -l $user -p $port "
+        SSHCMD="ssh -o StrictHostKeyChecking=no  -i $identify -l $user -p $port "
 fi
 
 j=0
 for i in `cat $argAll`; do
-	if [[ $j -eq 0 ]] ; then	
-		tmux new-window -n "tmux1" "$SSHCMD$i"
-		j=$((j+1))
-		continue
-	fi
-	tmux split-window "$SSHCMD$i"
-	tmux select-layout tiled
+        if [[ $j -eq 0 ]] ; then
+                tmux new-window -n "tmux1" "$SSHCMD$i"
+                j=$((j+1))
+                continue
+        fi
+        tmux split-window "$SSHCMD$i"
+        tmux select-layout tiled
 done
 tmux set synchronize-panes on
